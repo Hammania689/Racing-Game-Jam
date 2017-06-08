@@ -12,11 +12,8 @@ public class RoadGenerator : MonoBehaviour
     Road spawningPeice, prevPeice;
     Vector3 spawnPos;
 
-    Dictionary<int, Road> currRoad = new Dictionary<int,Road>();
+    Dictionary<int, Road> currRoad = new Dictionary<int, Road>();
 
-    private void Awake()
-    {
-    }
     // Use this for initialization
     void Start ()
     {
@@ -24,20 +21,30 @@ public class RoadGenerator : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
+            // Selects any 1 of the 3 possible peices
             randomPeice = Mathf.RoundToInt(Random.Range(0, 3));
+
+            // Sets the random number to the correlating array index prefab
             spawningPeice = road[randomPeice].GetComponent<Road>();
 
-
+            // Adds the current peice to the Dictionary
             currRoad.Add(i, spawningPeice);
 
+            // Spawns the Current peice
+            if(i >= 1)
+            {
+                // Stores previous dictionary element in variable
+                prevPeice = currRoad[i - 1];
+                spawnRot = prevPeice.GetSpawnRotation(prevPeice);
+                spawnPos = prevPeice.GetSpawnZone();
+            }
+
+            // Spawns the road accordingly
             Instantiate(road[randomPeice] as GameObject, spawnPos, spawnRot, this.gameObject.transform);
 
-            currRoad[i] = spawningPeice;
-            //spawnRot = spawningPeice.GetSpawnRotation(prevPeice);
+            //currRoad[i] = spawningPeice;
             spawnPos = spawningPeice.GetSpawnZone() + spawningPeice.transform.position;
-           // Debug.Log((i+1) + " position is : " + spawnPos);
+
         }
-        Debug.Log(currRoad.Values);
-        Debug.Log(currRoad.ContainsKey(1));
     }
 }
