@@ -7,7 +7,7 @@ public class Car : MonoBehaviour
     public float Speed = 2.2f;
 
     float time = 0;
-    Rigidbody rb;
+    Rigidbody2D rb;
     Quaternion currentRot;
 
     Vector3 movement;
@@ -16,7 +16,7 @@ public class Car : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         movement = Vector3.up;
         curve = Vector3.zero;
     }

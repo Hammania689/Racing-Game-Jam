@@ -6,23 +6,16 @@ public class FrictionTerrian : MonoBehaviour
 {
     Car driver;
 
-    void OnTriggerEnter(Collider other)
-    {
-        driver = other.GetComponent<Car>();
-        Debug.Log(driver.Speed);
-    }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         driver = other.GetComponent<Car>();
         driver.Speed = 10;
-        Debug.Log(driver.Speed);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         driver = other.GetComponent<Car>();
         driver.Speed = 1;
-        Debug.Log(driver.Speed);
     }
 }
